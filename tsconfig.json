@@ -11,7 +11,34 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true,
-    "paths": {}
-  }
+    "resolveJsonModule": true,
+    "paths": {
+      "@app/configs": [
+        "libs/configs/src"
+      ],
+      "@app/configs/*": [
+        "libs/configs/src/*"
+      ],
+      "@app/caching": [
+        "libs/caching/src"
+      ],
+      "@app/caching/*": [
+        "libs/caching/src/*"
+      ],
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ]
+    }
+  },
+  "include": [
+    "apps/**/*",
+    "libs/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

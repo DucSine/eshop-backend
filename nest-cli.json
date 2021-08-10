@@ -8,15 +8,6 @@
     "tsConfigPath": "apps/eshop-backend/tsconfig.app.json"
   },
   "projects": {
-    "eshop-backend": {
-      "type": "application",
-      "root": "apps/eshop-backend",
-      "entryFile": "main",
-      "sourceRoot": "apps/eshop-backend/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/eshop-backend/tsconfig.app.json"
-      }
-    },
     "eshop-gateway": {
       "type": "application",
       "root": "apps/eshop-gateway",
@@ -24,6 +15,33 @@
       "sourceRoot": "apps/eshop-gateway/src",
       "compilerOptions": {
         "tsConfigPath": "apps/eshop-gateway/tsconfig.app.json"
+      }
+    },
+    "configs": {
+      "type": "library",
+      "root": "libs/configs",
+      "entryFile": "index",
+      "sourceRoot": "libs/configs/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/configs/tsconfig.lib.json"
+      }
+    },
+    "caching": {
+      "type": "library",
+      "root": "libs/caching",
+      "entryFile": "index",
+      "sourceRoot": "libs/caching/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/caching/tsconfig.lib.json"
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     }
   }
