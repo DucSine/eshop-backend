@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/eshop-backend/src",
+  "monorepo": true,
+  "root": "apps/eshop-backend",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/eshop-backend/tsconfig.app.json"
+  },
+  "projects": {
+    "eshop-backend": {
+      "type": "application",
+      "root": "apps/eshop-backend",
+      "entryFile": "main",
+      "sourceRoot": "apps/eshop-backend/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/eshop-backend/tsconfig.app.json"
+      }
+    },
+    "eshop-gateway": {
+      "type": "application",
+      "root": "apps/eshop-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/eshop-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/eshop-gateway/tsconfig.app.json"
+      }
+    }
+  }
+}
