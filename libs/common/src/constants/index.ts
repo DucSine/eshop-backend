@@ -1,3 +1,7 @@
+export const SYSTEM_CODE_PREFIX = 'VLU';
+export const DEFAULT_PAGE_LIMIT = 10;
+export const DEFAULT_ACTIVITY_PAGE_LIMIT = 5;
+
 export enum SERVICES {
     AUTHENTICATOR = 'AUTHENTICATOR_SERVICE'
 }
