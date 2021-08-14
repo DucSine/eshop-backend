@@ -16,8 +16,9 @@ model Account {
   role     Int?    @default(3) // 1: admin, 2: restaurant, 3: customer
   status   Int?    @default(0) // 0: not active, 1: active, 2: locked
 
-  Customer   Customer?
-  Restaurant Restaurant?
+
+  Customer Customer?
+  Shop     Shop?
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -26,33 +27,34 @@ model Account {
 }
 
 model Customer {
-  id       String    @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  fullName String?   @map("full_name")
-  bDate    DateTime? @map("b_date")
-  gender   Boolean?  @default(true)
-  adress   String?
-  phone    String
-  avatar   String?
+  id        String    @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  accountId String?   @map("account_id") @db.ObjectId
+  fullName  String?   @map("full_name")
+  bDate     DateTime? @map("b_date")
+  gender    Boolean?  @default(true)
+  adress    String?
+  phone     String
+  avatar    String?
 
-  account   Account? @relation(fields: [accountId], references: [id])
-  accountId String?  @map("account_id") @db.ObjectId
-  Bill      Bill[]
-  Rate      Rate[]
+  Account Account? @relation(fields: [accountId], references: [id])
+  Bill    Bill[]
+  Rate    Rate[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  Cart Cart[]
   @@map("customer")
 }
 
-model Restaurant {
-  id             String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  restaurantName String? @map("restaurant_name")
-  adress         String?
-  phone          String?
-  banner         String?
-  caption        String?
-  accountId      String? @map("account_id") @db.ObjectId
+model Shop {
+  id        String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  accountId String? @map("account_id") @db.ObjectId
+  shopName  String? @map("shop_name")
+  adress    String?
+  phone     String?
+  banner    String?
+  caption   String?
 
   Account Account? @relation(fields: [accountId], references: [id])
   Goods   Goods[]
@@ -61,23 +63,24 @@ model Restaurant {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("restaurant")
+  Cart Cart[]
+  @@map("shop")
 }
 
 model Goods {
-  id           String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  goodsName    String? @map("goods_name")
-  images       String?
-  unit         String?
-  buys         Int?
-  star         Int?    @default(0)
-  caption      String?
-  restaurantId String? @map("restaurant_id") @db.ObjectId
+  id        String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  shopId    String? @map("shop_id") @db.ObjectId
+  goodsName String? @map("goods_name")
+  images    String?
+  unit      String?
+  buys      Int?
+  star      Int?    @default(0)
+  caption   String?
 
   Options    Options[]
   CartDetail CartDetail[]
   BillDetail BillDetail[]
-  Restaurant Restaurant?  @relation(fields: [restaurantId], references: [id])
+  Shop       Shop?        @relation(fields: [shopId], references: [id])
   Rate       Rate[]
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -88,9 +91,9 @@ model Goods {
 
 model Options {
   id      String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  goodsId String? @map("goods_id") @db.ObjectId
   option  String?
   price   Int?
-  goodsId String? @map("goods_id") @db.ObjectId
 
   Goods      Goods?       @relation(fields: [goodsId], references: [id])
   CartDetail CartDetail[]
@@ -103,15 +106,18 @@ model Options {
 }
 
 model Cart {
-  id           String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  customerId   String? @map("customer_id") @db.ObjectId
-  restaurantId String? @map("restaurant_id") @db.ObjectId
+  id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  customerId String? @map("customer_id") @db.ObjectId
+  shopId     String? @map("shop_id") @db.ObjectId
 
+  Customer   Customer?    @relation(fields: [customerId], references: [id])
+  Shop       Shop?        @relation(fields: [shopId], references: [id])
   CartDetail CartDetail[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  @@unique([customerId, shopId])
   @@map("cart")
 }
 
@@ -133,14 +139,14 @@ model CartDetail {
 }
 
 model Bill {
-  id           String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  customerId   String? @map("customer_id") @db.ObjectId
-  restaurantId String? @map("restaurant_id") @db.ObjectId
-  status       Int? // 0: cancel, 1: done, 2 wait confirm, 3 confirmed, 4 wait delivery
-  payment      Int? // 0: cod, 1: momo, 2: zalo pay, ...
+  id         String  @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  customerId String? @map("customer_id") @db.ObjectId
+  shopId     String? @map("shop_id") @db.ObjectId
+  status     Int? // 0: cancel, 1: done, 2 wait confirm, 3 confirmed, 4 wait delivery
+  payment    Int? // 0: cod, 1: momo, 2: zalo pay, ...
 
   Customer   Customer?    @relation(fields: [customerId], references: [id])
-  Restaurant Restaurant?  @relation(fields: [restaurantId], references: [id])
+  Shop       Shop?        @relation(fields: [shopId], references: [id])
   BillDetail BillDetail[]
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -174,11 +180,11 @@ model Rate {
   message    String?
   images     String?
 
-  Goods    Goods?    @relation(fields: [goodsId], references: [id])
-  Customer Customer? @relation(fields: [customerId], references: [id])
+  Goods     Goods?    @relation(fields: [goodsId], references: [id])
+  Customer  Customer? @relation(fields: [customerId], references: [id])
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
+  @@unique([goodsId, customerId])
   @@map("rate")
 }

@@ -17,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         const account = await this._account.instance.findUnique({
             where: { id },
             include: {
-                Restaurant: true,
+                Shop: true,
                 Customer: true
             }
         });
