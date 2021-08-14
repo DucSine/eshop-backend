@@ -15,9 +15,11 @@
         "start:gateway": "node dist/apps/eshop-gateway/main.js",
         "start:main": "node dist/apps/eshop-gateway/main.js",
         "start:auth": "node dist/apps/authenticator/main.js",
+        "start:goods": "node dist/apps/goods/main.js",
         "dev:gateway": "nest start eshop-gateway --watch",
         "dev:main": "nest start eshop-gateway --watch",
         "dev:auth": "nest start authenticator --watch",
+        "dev:goods": "nest start goods --watch",
         "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\""
     },

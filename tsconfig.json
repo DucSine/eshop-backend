@@ -1,62 +1,32 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "@app/configs": [
-        "libs/configs/src"
-      ],
-      "@app/configs/*": [
-        "libs/configs/src/*"
-      ],
-      "@app/caching": [
-        "libs/caching/src"
-      ],
-      "@app/caching/*": [
-        "libs/caching/src/*"
-      ],
-      "@app/common": [
-        "libs/common/src"
-      ],
-      "@app/common/*": [
-        "libs/common/src/*"
-      ],
-      "@app/repositories": [
-        "libs/repositories/src"
-      ],
-      "@app/repositories/*": [
-        "libs/repositories/src/*"
-      ],
-      "@app/utils": [
-        "libs/utils/src"
-      ],
-      "@app/utils/*": [
-        "libs/utils/src/*"
-      ],
-      "@app/logger": [
-        "libs/logger/src"
-      ],
-      "@app/logger/*": [
-        "libs/logger/src/*"
-      ]
-    }
-  },
-  "include": [
-    "apps/**/*",
-    "libs/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es2017",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "incremental": true,
+        "resolveJsonModule": true,
+        "paths": {
+            "@app/configs": ["libs/configs/src"],
+            "@app/configs/*": ["libs/configs/src/*"],
+            "@app/caching": ["libs/caching/src"],
+            "@app/caching/*": ["libs/caching/src/*"],
+            "@app/common": ["libs/common/src"],
+            "@app/common/*": ["libs/common/src/*"],
+            "@app/repositories": ["libs/repositories/src"],
+            "@app/repositories/*": ["libs/repositories/src/*"],
+            "@app/utils": ["libs/utils/src"],
+            "@app/utils/*": ["libs/utils/src/*"],
+            "@app/logger": ["libs/logger/src"],
+            "@app/logger/*": ["libs/logger/src/*"]
+        }
+    },
+    "include": ["apps/**/*", "libs/**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
 }
