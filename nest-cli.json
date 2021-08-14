@@ -70,6 +70,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/logger/tsconfig.lib.json"
       }
+    },
+    "authenticator": {
+      "type": "application",
+      "root": "apps/authenticator",
+      "entryFile": "main",
+      "sourceRoot": "apps/authenticator/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/authenticator/tsconfig.app.json"
+      }
     }
   }
 }

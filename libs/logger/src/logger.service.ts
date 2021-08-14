@@ -4,7 +4,6 @@ import { WinstonLogger, WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 type Message = {
     message: string;
     metadata?: {
-        traceId: string;
         context?: string;
         payload?: Record<string, any>;
         exception?: Record<string, any>;

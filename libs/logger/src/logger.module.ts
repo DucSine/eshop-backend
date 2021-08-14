@@ -18,7 +18,7 @@ import { LoggerService } from './logger.service';
                 }),
                 new winston.transports.MongoDB({
                     name: 'info',
-                    db: ConfigService.getInstance().get('MONGO_DATABASE_URL'),
+                    db: ConfigService.getInstance().get('DATABASE_URL'),
                     collection: ConfigService.getInstance().get('LOGGER_COLLECTION_NAME'),
                     storeHost: true,
                     options: { useUnifiedTopology: true }

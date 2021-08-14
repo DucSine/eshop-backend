@@ -16,8 +16,8 @@ model Account {
   role     Int?    @default(3) // 1: admin, 2: restaurant, 3: customer
   status   Int?    @default(0) // 0: not active, 1: active, 2: locked
 
-  Customer   Customer[]
-  Restaurant Restaurant[]
+  Customer   Customer?
+  Restaurant Restaurant?
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

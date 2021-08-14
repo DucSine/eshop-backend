@@ -23,13 +23,13 @@ export class LoggingInterceptor implements NestInterceptor {
 
         const traceId = req.id;
         const requestMetadata = this.getRequestMetadata(req);
-        this._logger.log({ message: 'Request', metadata: { traceId, payload: requestMetadata } });
+        this._logger.log({ message: 'Request', metadata: { payload: requestMetadata } });
 
         return next.handle().pipe(
             tap((data) => {
                 const responseMetadata = this.getResponseMetadata(res);
                 const responseTime = this._utils.getDate().diff(now);
-                this._logger.log({ message: 'Response', metadata: { traceId, payload: { ...responseMetadata, responseTime } } });
+                this._logger.log({ message: 'Response', metadata: { payload: { ...responseMetadata, responseTime } } });
             })
         );
     }

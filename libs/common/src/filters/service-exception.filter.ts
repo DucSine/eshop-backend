@@ -14,7 +14,7 @@ export class ServiceExceptionFilter implements ExceptionFilter {
             (exception instanceof HttpException && exception.getResponse()['statusCode'] === HttpStatus.INTERNAL_SERVER_ERROR)
         ) {
             const traceId = host.getArgByIndex(0)['traceId'];
-            this._logger.error({ message: exception.name, metadata: { traceId, exception } }, exception.stack);
+            this._logger.error({ message: exception.name, metadata: { exception } }, exception.stack);
         }
 
         return new RpcException(

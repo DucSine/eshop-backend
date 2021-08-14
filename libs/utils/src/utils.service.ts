@@ -61,10 +61,7 @@ export class UtilsService {
      * @returns token
      */
     encryptValue(payload: any): string {
-        return AES.encrypt(
-            JSON.stringify(payload),
-            ConfigService.getInstance().get('SERCRET_KEY')
-        ).toString();
+        return AES.encrypt(JSON.stringify(payload), ConfigService.getInstance().get('SERCRET_KEY')).toString();
     }
 
     /**
@@ -113,9 +110,6 @@ export class UtilsService {
         if (defaultCurrentDateOnUndefined) {
             return [dayjs(from).startOf('day').toDate(), dayjs(to).endOf('day').toDate()];
         }
-        return [
-            from ? dayjs(from).startOf('day').toDate() : undefined,
-            to ? dayjs(to).endOf('day').toDate() : undefined
-        ];
+        return [from ? dayjs(from).startOf('day').toDate() : undefined, to ? dayjs(to).endOf('day').toDate() : undefined];
     }
 }

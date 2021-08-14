@@ -20,12 +20,11 @@ export class GatewayHttpExceptionFilter implements ExceptionFilter {
         const { statusCode, message, error } = exceptionResponse;
         const traceId = request.id;
 
-        this._logger.error({ message: exception.name, metadata: { traceId, exception } }, exception.stack);
+        this._logger.error({ message: exception.name, metadata: { exception } }, exception.stack);
 
         response.status(status).json({
             statusCode,
-            message: error ? message : getMessage(`HTTP_CODE.${status}`) || error || message,
-            traceId: statusCode === HttpStatus.INTERNAL_SERVER_ERROR ? traceId : undefined
+            message: error ? message : getMessage(`HTTP_CODE.${status}`) || error || message
         });
     }
 }
